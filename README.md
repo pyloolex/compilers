@@ -1,4 +1,4 @@
-# compilers
+# Compilers analysis
 
 ### How to setup libgccjit
 
@@ -43,7 +43,9 @@
 
 2. Install libgccjit library.
 
+    ```
     sudo apt install libgccjit-7-dev
+    ```
 
 3. Before compilation you need to find out where libgccjit.h and libgccjit.so are.
     It can be done like this:
@@ -79,7 +81,7 @@
     gcc hello.c -o hello -lgccjit
     ```
 
-5. Before running binary you need to specify crtbeginS.o location. You can do it like in the previous step.
+5. Before running binary you need to specify _crtbeginS.o_ location. You can do it like in the previous step.
 
     ```
     find / -name 'crtbeginS*'
