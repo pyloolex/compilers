@@ -5,6 +5,11 @@
 
 
 #define MAX_STACK_DEPTH 100
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 60 // < 62
+
+
+typedef int (*fn_type)(int, int, char**);
 
 
 void push_to_stack(gcc_jit_context* ctxt, gcc_jit_block* block, 
@@ -284,6 +289,46 @@ void create_code(gcc_jit_context* ctxt)
 }
 
 
+void measure_time(char** args, fn_type calculate)
+{
+    double result[MAX_STATEMENT_SIZE];
+    int len;
+    for (len = 51; len < MAX_STATEMENT_SIZE; len += 2)
+    {
+        printf("[len = %d]\n", len);
+        double sum = 0;
+        int attempt;
+        for (attempt = 0; attempt < ATTEMPTS_PER_TEST; attempt++)
+        {
+            double start_time = clock();
+            
+            int x;
+            for (x = 0; x < 1e7; x++)
+            {
+                calculate(x, len, args);
+            }
+            
+            double elapsed = ((clock() - start_time) / CLOCKS_PER_SEC);
+            sum += elapsed;
+            
+            printf("Elapsed time: %.3f ms\n", elapsed);
+        }
+        printf("_________________________________\n");
+        printf("Average elapsed time: %.3f ms\n", sum / attempt);
+        result[len] = sum / attempt;
+    }
+    
+    printf("\n");
+    int i;
+    for (i = 1; i < MAX_STATEMENT_SIZE; i += 2)
+    {
+        printf("(%d;%.3f)", i, result[i]);
+    }
+    printf("\n");
+}
+
+
+
 int main()
 {
     gcc_jit_context* ctxt;
@@ -314,6 +359,7 @@ int main()
         return 1;
     }
     
+    /*
     char** args = (char*[])
     {
         "50",
@@ -334,21 +380,78 @@ int main()
         "-",
         "+",
     }; // x=12 -> -40
+    */
+    char** args = (char*[])
+    {
+        "24",
+        "50",
+        "*",
+        "310",
+        "-",
+        "755",
+        "*",
+        "x",
+        "+",
+        "x",
+        "-",
+        "19",
+        "/",
+        "69",
+        "+",
+        "x",
+        "+",
+        "49",
+        "*",
+        "12",
+        "-",
+        "5",
+        "+",
+        "4",
+        "/",
+        "x",
+        "*",
+        "7",
+        "-",
+        "10",
+        "+",
+        "x",
+        "*",
+        "x",
+        "+",
+        "12",
+        "-",
+        "313",
+        "/",
+        "x",
+        "+",
+        "4",
+        "/",
+        "9",
+        "*",
+        "2",
+        "-",
+        "x",
+        "+",
+        "5",
+        "-",
+        "16",
+        "/",
+        "8",
+        "*",
+        "x",
+        "+",
+        "3",
+        "-",
+        "77",
+        "/",
+    }; 
     
-    typedef int (*fn_type)(int, int, char**);
+   
     fn_type calculate = (fn_type)fn_ptr;
     
-    double start_time = clock();
-    //printf("Hi! Result: %d\n", calculate(12, 17, args));
+    //printf("%d\n", calculate(12, 61, args));
     
-    int i = 0;
-    for (i = 0; i < 1e7; i++)
-    {
-        calculate(i, 17, args);
-    }
-    
-    printf("Elapsed time: %f ms\n", ((clock() - start_time) / CLOCKS_PER_SEC));
-    
+    measure_time(args, calculate);
     
     return 0;
 }
