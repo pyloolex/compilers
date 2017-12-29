@@ -88,7 +88,7 @@
     ```
 
     It should look something like this:
-    `/usr/lib/gcc/x86_64-linux-gnu/5/`
+    `/usr/lib/gcc/x86_64-linux-gnu/4.8/`
 
     Add it to the LIBRARY_PATH:
     
