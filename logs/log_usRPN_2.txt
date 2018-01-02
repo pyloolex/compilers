@@ -1,272 +1,125 @@
-[len = 1]
-Elapsed time: 0.234 ms
-Elapsed time: 0.217 ms
-Elapsed time: 0.207 ms
-Elapsed time: 0.219 ms
-Elapsed time: 0.221 ms
-Elapsed time: 0.217 ms
-Elapsed time: 0.213 ms
-Elapsed time: 0.209 ms
-Elapsed time: 0.231 ms
-Elapsed time: 0.215 ms
-Elapsed time: 0.245 ms
-Elapsed time: 0.222 ms
-Elapsed time: 0.210 ms
-Elapsed time: 0.229 ms
-Elapsed time: 0.212 ms
-_________________________________
-Average elapsed time: 0.220 ms
-[len = 3]
-Elapsed time: 0.494 ms
-Elapsed time: 0.479 ms
-Elapsed time: 0.449 ms
-Elapsed time: 0.458 ms
-Elapsed time: 0.497 ms
-Elapsed time: 0.474 ms
-Elapsed time: 0.453 ms
-Elapsed time: 0.482 ms
-Elapsed time: 0.508 ms
-Elapsed time: 0.501 ms
-Elapsed time: 0.479 ms
-Elapsed time: 0.470 ms
-Elapsed time: 0.476 ms
-Elapsed time: 0.459 ms
-Elapsed time: 0.476 ms
-_________________________________
-Average elapsed time: 0.477 ms
-[len = 5]
-Elapsed time: 0.784 ms
-Elapsed time: 0.797 ms
-Elapsed time: 0.811 ms
-Elapsed time: 0.721 ms
-Elapsed time: 0.731 ms
-Elapsed time: 0.723 ms
-Elapsed time: 0.812 ms
-Elapsed time: 0.746 ms
-Elapsed time: 0.766 ms
-Elapsed time: 0.736 ms
-Elapsed time: 0.699 ms
-Elapsed time: 0.688 ms
-Elapsed time: 0.700 ms
-Elapsed time: 0.705 ms
-Elapsed time: 0.704 ms
-_________________________________
-Average elapsed time: 0.742 ms
-[len = 7]
-Elapsed time: 0.986 ms
-Elapsed time: 0.980 ms
-Elapsed time: 0.951 ms
-Elapsed time: 0.970 ms
-Elapsed time: 0.990 ms
-Elapsed time: 0.969 ms
-Elapsed time: 0.964 ms
-Elapsed time: 0.948 ms
-Elapsed time: 0.954 ms
-Elapsed time: 0.978 ms
-Elapsed time: 0.945 ms
-Elapsed time: 0.950 ms
-Elapsed time: 0.921 ms
-Elapsed time: 1.007 ms
-Elapsed time: 0.957 ms
-_________________________________
-Average elapsed time: 0.965 ms
-[len = 9]
-Elapsed time: 1.039 ms
-Elapsed time: 1.006 ms
-Elapsed time: 1.096 ms
-Elapsed time: 1.039 ms
-Elapsed time: 1.077 ms
-Elapsed time: 1.077 ms
-Elapsed time: 1.005 ms
-Elapsed time: 1.157 ms
-Elapsed time: 1.140 ms
-Elapsed time: 1.095 ms
-Elapsed time: 1.002 ms
-Elapsed time: 1.140 ms
-Elapsed time: 1.057 ms
-Elapsed time: 1.063 ms
-Elapsed time: 1.092 ms
-_________________________________
-Average elapsed time: 1.072 ms
-[len = 11]
-Elapsed time: 1.171 ms
-Elapsed time: 1.213 ms
-Elapsed time: 1.136 ms
-Elapsed time: 1.173 ms
-Elapsed time: 1.189 ms
-Elapsed time: 1.154 ms
-Elapsed time: 1.155 ms
-Elapsed time: 1.259 ms
-Elapsed time: 1.165 ms
-Elapsed time: 1.190 ms
-Elapsed time: 1.193 ms
-Elapsed time: 1.206 ms
-Elapsed time: 1.177 ms
-Elapsed time: 1.182 ms
-Elapsed time: 1.190 ms
-_________________________________
-Average elapsed time: 1.183 ms
-[len = 13]
-Elapsed time: 1.491 ms
-Elapsed time: 1.456 ms
-Elapsed time: 1.445 ms
-Elapsed time: 1.491 ms
-Elapsed time: 1.448 ms
-Elapsed time: 1.502 ms
-Elapsed time: 1.546 ms
-Elapsed time: 1.420 ms
-Elapsed time: 1.422 ms
-Elapsed time: 1.452 ms
-Elapsed time: 1.606 ms
-Elapsed time: 1.528 ms
-Elapsed time: 1.594 ms
-Elapsed time: 1.493 ms
-Elapsed time: 1.474 ms
-_________________________________
-Average elapsed time: 1.491 ms
-[len = 15]
-Elapsed time: 1.681 ms
-Elapsed time: 1.615 ms
-Elapsed time: 1.652 ms
-Elapsed time: 1.690 ms
-Elapsed time: 1.673 ms
-Elapsed time: 1.700 ms
-Elapsed time: 1.714 ms
-Elapsed time: 1.764 ms
-Elapsed time: 1.692 ms
-Elapsed time: 1.692 ms
-Elapsed time: 1.705 ms
-Elapsed time: 1.710 ms
-Elapsed time: 1.653 ms
-Elapsed time: 1.786 ms
-Elapsed time: 1.670 ms
-_________________________________
-Average elapsed time: 1.693 ms
-[len = 17]
-Elapsed time: 1.682 ms
-Elapsed time: 1.681 ms
-Elapsed time: 1.700 ms
-Elapsed time: 1.757 ms
-Elapsed time: 1.789 ms
-Elapsed time: 1.791 ms
-Elapsed time: 1.707 ms
-Elapsed time: 1.710 ms
-Elapsed time: 1.762 ms
-Elapsed time: 2.011 ms
-Elapsed time: 1.767 ms
-Elapsed time: 1.798 ms
-Elapsed time: 1.779 ms
-Elapsed time: 1.686 ms
-Elapsed time: 1.696 ms
-_________________________________
-Average elapsed time: 1.754 ms
-[len = 19]
-Elapsed time: 1.945 ms
-Elapsed time: 1.955 ms
-Elapsed time: 1.996 ms
-Elapsed time: 2.022 ms
-Elapsed time: 2.003 ms
-Elapsed time: 2.136 ms
-Elapsed time: 2.055 ms
-Elapsed time: 2.041 ms
-Elapsed time: 2.069 ms
-Elapsed time: 2.103 ms
-Elapsed time: 2.084 ms
-Elapsed time: 2.106 ms
-Elapsed time: 2.077 ms
-Elapsed time: 1.987 ms
-Elapsed time: 2.053 ms
-_________________________________
-Average elapsed time: 2.042 ms
-[len = 21]
-Elapsed time: 2.259 ms
-Elapsed time: 2.304 ms
-Elapsed time: 2.306 ms
-Elapsed time: 2.368 ms
-Elapsed time: 2.335 ms
-Elapsed time: 2.508 ms
-Elapsed time: 2.187 ms
-Elapsed time: 2.356 ms
-Elapsed time: 2.145 ms
-Elapsed time: 2.132 ms
-Elapsed time: 2.145 ms
-Elapsed time: 2.333 ms
-Elapsed time: 2.262 ms
-Elapsed time: 2.385 ms
-Elapsed time: 2.302 ms
-_________________________________
-Average elapsed time: 2.288 ms
-[len = 23]
-Elapsed time: 2.498 ms
-Elapsed time: 2.501 ms
-Elapsed time: 2.534 ms
-Elapsed time: 2.493 ms
-Elapsed time: 2.502 ms
-Elapsed time: 2.421 ms
-Elapsed time: 2.368 ms
-Elapsed time: 2.453 ms
-Elapsed time: 2.482 ms
-Elapsed time: 2.420 ms
-Elapsed time: 2.391 ms
-Elapsed time: 2.333 ms
-Elapsed time: 2.445 ms
-Elapsed time: 2.345 ms
-Elapsed time: 2.526 ms
-_________________________________
-Average elapsed time: 2.447 ms
-[len = 25]
-Elapsed time: 2.777 ms
-Elapsed time: 2.692 ms
-Elapsed time: 2.767 ms
-Elapsed time: 2.692 ms
-Elapsed time: 2.658 ms
-Elapsed time: 2.650 ms
-Elapsed time: 2.764 ms
-Elapsed time: 2.825 ms
-Elapsed time: 2.831 ms
-Elapsed time: 2.850 ms
-Elapsed time: 2.743 ms
-Elapsed time: 2.666 ms
-Elapsed time: 2.720 ms
-Elapsed time: 2.761 ms
-Elapsed time: 2.735 ms
-_________________________________
-Average elapsed time: 2.742 ms
-[len = 27]
-Elapsed time: 2.962 ms
-Elapsed time: 2.841 ms
-Elapsed time: 2.784 ms
-Elapsed time: 2.886 ms
-Elapsed time: 2.888 ms
-Elapsed time: 2.811 ms
-Elapsed time: 2.857 ms
-Elapsed time: 2.832 ms
-Elapsed time: 2.861 ms
-Elapsed time: 2.966 ms
-Elapsed time: 2.957 ms
-Elapsed time: 2.725 ms
-Elapsed time: 2.694 ms
-Elapsed time: 2.806 ms
-Elapsed time: 2.726 ms
-_________________________________
-Average elapsed time: 2.840 ms
-[len = 29]
-Elapsed time: 3.223 ms
-Elapsed time: 3.048 ms
-Elapsed time: 2.987 ms
-Elapsed time: 3.158 ms
-Elapsed time: 3.031 ms
-Elapsed time: 2.979 ms
-Elapsed time: 3.133 ms
-Elapsed time: 3.078 ms
-Elapsed time: 3.243 ms
-Elapsed time: 3.268 ms
-Elapsed time: 2.993 ms
-Elapsed time: 2.974 ms
-Elapsed time: 3.221 ms
-Elapsed time: 3.088 ms
-Elapsed time: 3.175 ms
-_________________________________
-Average elapsed time: 3.107 ms
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 30
 
-(1;0.220)(3;0.477)(5;0.742)(7;0.965)(9;1.072)(11;1.183)(13;1.491)(15;1.693)(17;1.754)(19;2.042)(21;2.288)(23;2.447)(25;2.742)(27;2.840)(29;3.107)
+[len = 1]
+Elapsed time: 1.188 ms
+Elapsed time: 1.193 ms
+Elapsed time: 1.192 ms
+Elapsed time: 1.195 ms
+Elapsed time: 1.255 ms
+_________________________________
+Average elapsed time: 1.205 ms
+[len = 3]
+Elapsed time: 1.896 ms
+Elapsed time: 1.828 ms
+Elapsed time: 1.859 ms
+Elapsed time: 1.865 ms
+Elapsed time: 1.834 ms
+_________________________________
+Average elapsed time: 1.856 ms
+[len = 5]
+Elapsed time: 2.362 ms
+Elapsed time: 2.408 ms
+Elapsed time: 2.426 ms
+Elapsed time: 2.371 ms
+Elapsed time: 2.386 ms
+_________________________________
+Average elapsed time: 2.390 ms
+[len = 7]
+Elapsed time: 3.016 ms
+Elapsed time: 3.081 ms
+Elapsed time: 3.068 ms
+Elapsed time: 3.067 ms
+Elapsed time: 2.974 ms
+_________________________________
+Average elapsed time: 3.041 ms
+[len = 9]
+Elapsed time: 3.179 ms
+Elapsed time: 3.153 ms
+Elapsed time: 3.156 ms
+Elapsed time: 3.183 ms
+Elapsed time: 3.147 ms
+_________________________________
+Average elapsed time: 3.164 ms
+[len = 11]
+Elapsed time: 3.322 ms
+Elapsed time: 3.343 ms
+Elapsed time: 3.392 ms
+Elapsed time: 3.268 ms
+Elapsed time: 3.287 ms
+_________________________________
+Average elapsed time: 3.322 ms
+[len = 13]
+Elapsed time: 3.795 ms
+Elapsed time: 3.866 ms
+Elapsed time: 3.874 ms
+Elapsed time: 3.843 ms
+Elapsed time: 3.849 ms
+_________________________________
+Average elapsed time: 3.845 ms
+[len = 15]
+Elapsed time: 4.481 ms
+Elapsed time: 4.371 ms
+Elapsed time: 4.306 ms
+Elapsed time: 4.225 ms
+Elapsed time: 4.307 ms
+_________________________________
+Average elapsed time: 4.338 ms
+[len = 17]
+Elapsed time: 4.403 ms
+Elapsed time: 4.502 ms
+Elapsed time: 4.502 ms
+Elapsed time: 4.453 ms
+Elapsed time: 4.373 ms
+_________________________________
+Average elapsed time: 4.447 ms
+[len = 19]
+Elapsed time: 4.984 ms
+Elapsed time: 5.057 ms
+Elapsed time: 5.083 ms
+Elapsed time: 5.066 ms
+Elapsed time: 5.118 ms
+_________________________________
+Average elapsed time: 5.061 ms
+[len = 21]
+Elapsed time: 5.881 ms
+Elapsed time: 5.648 ms
+Elapsed time: 5.533 ms
+Elapsed time: 5.517 ms
+Elapsed time: 5.553 ms
+_________________________________
+Average elapsed time: 5.626 ms
+[len = 23]
+Elapsed time: 6.091 ms
+Elapsed time: 6.136 ms
+Elapsed time: 6.010 ms
+Elapsed time: 6.021 ms
+Elapsed time: 6.152 ms
+_________________________________
+Average elapsed time: 6.082 ms
+[len = 25]
+Elapsed time: 6.566 ms
+Elapsed time: 6.714 ms
+Elapsed time: 6.583 ms
+Elapsed time: 6.608 ms
+Elapsed time: 6.620 ms
+_________________________________
+Average elapsed time: 6.618 ms
+[len = 27]
+Elapsed time: 6.881 ms
+Elapsed time: 6.897 ms
+Elapsed time: 7.159 ms
+Elapsed time: 7.054 ms
+Elapsed time: 6.801 ms
+_________________________________
+Average elapsed time: 6.958 ms
+[len = 29]
+Elapsed time: 7.273 ms
+Elapsed time: 7.356 ms
+Elapsed time: 7.304 ms
+Elapsed time: 7.242 ms
+Elapsed time: 7.388 ms
+_________________________________
+Average elapsed time: 7.313 ms
+
+(1;1.205)(3;1.856)(5;2.390)(7;3.041)(9;3.164)(11;3.322)(13;3.845)(15;4.338)(17;4.447)(19;5.061)(21;5.626)(23;6.082)(25;6.618)(27;6.958)(29;7.313)

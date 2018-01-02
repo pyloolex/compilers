@@ -1,44 +1,113 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
-#define ATTEMPTS_PER_TEST 15
+
+#define ATTEMPTS_PER_TEST 5
 #define MAX_STATEMENT_SIZE 30 // < 62
 
-int calculate(int x, int size, char** arr)
+
+char** statement = (char*[])
 {
-    int stack[100];
+    "24.21",
+    "50",
+    "*",
+    "310",
+    "-",
+    "755",
+    "*",
+    "x",
+    "+",
+    "x",
+    "-",
+    "19",
+    "/",
+    "69",
+    "+",
+    "x",
+    "+",
+    "49",
+    "*",
+    "12",
+    "-",
+    "5",
+    "+",
+    "4",
+    "/",
+    "x",
+    "*",
+    "7",
+    "-",
+    "10",
+    "+",
+    "x",
+    "*",
+    "x",
+    "+",
+    "12",
+    "-",
+    "313",
+    "/",
+    "x",
+    "+",
+    "4",
+    "/",
+    "9",
+    "*",
+    "2",
+    "-",
+    "x",
+    "+",
+    "5",
+    "-",
+    "16",
+    "/",
+    "8",
+    "*",
+    "x",
+    "+",
+    "3",
+    "-",
+    "77",
+    "/",
+}; 
+
+
+long double calculate(long double x, int size)
+{
+    long double stack[100];
     int stack_size = 0;
     
     int i;
     for (i = 0; i < size; i++)
     {
-        if (arr[i][0] == '+')
+        if (statement[i][0] == '+')
         {
             stack[stack_size - 2] += stack[stack_size - 1];
             stack_size--;
         }
-        else if (arr[i][0] == '-')
+        else if (statement[i][0] == '-')
         {
             stack[stack_size - 2] -= stack[stack_size - 1];
             stack_size--;
         }
-        else if (arr[i][0] == '*')
+        else if (statement[i][0] == '*')
         {
             stack[stack_size - 2] *= stack[stack_size - 1];
             stack_size--;
         }
-        else if (arr[i][0] == '/')
+        else if (statement[i][0] == '/')
         {
             stack[stack_size - 2] /= stack[stack_size - 1];
             stack_size--;
         }
-        else if (arr[i][0] == 'x')
+        else if (statement[i][0] == 'x')
         {
             stack[stack_size++] = x;
         }
         else
         {
-            stack[stack_size++] = atoi(arr[i]);
+            stack[stack_size++] = (long double)atof(statement[i]);
         }
     }
     
@@ -46,9 +115,9 @@ int calculate(int x, int size, char** arr)
 }
 
 
-void measure_time(char** args)
+void measure_time()
 {
-    double result[MAX_STATEMENT_SIZE];
+    double timer[MAX_STATEMENT_SIZE];
     int len;
     for (len = 1; len < MAX_STATEMENT_SIZE; len += 2)
     {
@@ -62,7 +131,7 @@ void measure_time(char** args)
             int x;
             for (x = 0; x < 1e7; x++)
             {
-                calculate(x, len, args);
+                calculate(x, len);
             }
             
             double elapsed = ((clock() - start_time) / CLOCKS_PER_SEC);
@@ -70,16 +139,17 @@ void measure_time(char** args)
             
             printf("Elapsed time: %.3f ms\n", elapsed);
         }
+        timer[len] = sum / attempt;
+        
         printf("_________________________________\n");
         printf("Average elapsed time: %.3f ms\n", sum / attempt);
-        result[len] = sum / attempt;
     }
     
     printf("\n");
     int i;
     for (i = 1; i < MAX_STATEMENT_SIZE; i += 2)
     {
-        printf("(%d;%.3f)", i, result[i]);
+        printf("(%d;%.3f)", i, timer[i]);
     }
     printf("\n");
 }
@@ -87,97 +157,9 @@ void measure_time(char** args)
 
 int main()
 {
-    /*
-    char** args = (char*[])
-    {
-        "50",
-        "x",
-        "3",
-        "*",
-        "+",
-        "2",
-        "-",
-        "7",
-        "/",
-        "6",
-        "/",
-        "6",
-        "4",
-        "x",
-        "*",
-        "-",
-        "+",
-    }; // x=12 -> -40
-    */
-    char** args = (char*[])
-    {
-        "24",
-        "50",
-        "*",
-        "310",
-        "-",
-        "755",
-        "*",
-        "x",
-        "+",
-        "x",
-        "-",
-        "19",
-        "/",
-        "69",
-        "+",
-        "x",
-        "+",
-        "49",
-        "*",
-        "12",
-        "-",
-        "5",
-        "+",
-        "4",
-        "/",
-        "x",
-        "*",
-        "7",
-        "-",
-        "10",
-        "+",
-        "x",
-        "*",
-        "x",
-        "+",
-        "12",
-        "-",
-        "313",
-        "/",
-        "x",
-        "+",
-        "4",
-        "/",
-        "9",
-        "*",
-        "2",
-        "-",
-        "x",
-        "+",
-        "5",
-        "-",
-        "16",
-        "/",
-        "8",
-        "*",
-        "x",
-        "+",
-        "3",
-        "-",
-        "77",
-        "/",
-    }; 
+    //printf("%Lf\n", calculate(12, 3));
     
-    
-    printf("%d\n", calculate(12, 61, args));
-    
-    //measure_time(args);
+    measure_time();
     
     return 0;
 }
