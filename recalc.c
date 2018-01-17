@@ -8,7 +8,7 @@
 #include "executions.h"
 
 
-bool parse(tables_t* tables)
+int parse(tables_t* tables, int x)
 {
     int state[MAX_STATES] = {0};
     int result[MAX_STATES] = {0};
@@ -22,20 +22,26 @@ bool parse(tables_t* tables)
         {
             printf("Invalid token has been found at %d-th position of input.",
                    token.data);
-            return false;
+            exit(0);
         }
         
         int cur_state = state[stack_top];
         table_cell_t cell = tables->trans[cur_state][token.id];
-        
+
         switch (cell.action)
         {
             case AC_SHIFT:
                 stack_top++;
                 state[stack_top] = cell.num;
-                result[stack_top] = token.data;
+                if (token.data != X)
+                {
+                    result[stack_top] = token.data;
+                }
+                else
+                {
+                    result[stack_top] = x;
+                }
                 token = my_yylex(0);
-                //printf("%d\n", token.id);
                 break;
                 
             case AC_REDUCE:
@@ -47,14 +53,24 @@ bool parse(tables_t* tables)
                 break;
                 
             case AC_ACCEPT:
-                printf("Result: %d\n", result[1]);
-                return true;
+                return result[1];
                 
             case AC_ERROR:
                 printf("Invalid token [id=%d] for the %d-th state.\n",
                        token.id, cur_state);
-                return false;
+                exit(0);
         }
+    }
+}
+
+
+void measure_time(tables_t* tables)
+{
+    int i;
+    for (i = 0; i < 10; i++)
+    {
+        my_yylex(1);
+        printf("%d\n", parse(tables, i));
     }
 }
 
@@ -65,8 +81,9 @@ int main()
     {
         #include "syn_tables.h"
     };
-    
-    parse(&tables);
+
+    measure_time(&tables);
+    //printf("%d\n", parse(&tables, 100));
     
     return 0;
 }

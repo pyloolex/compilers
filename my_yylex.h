@@ -36,6 +36,12 @@ void parse_data(token_t* token, char* input, int start_pos, int len)
 {
     char* temp = malloc(len);
     memcpy(temp, input + start_pos, len);
+
+    if (temp[0] == 'x')
+    {
+        token->data = X;
+        return;
+    }
     
     int i;
     for (i = 0; i < strlen(temp); i++)
@@ -56,7 +62,7 @@ token_t my_yylex(bool restart)
         #include "lex_automaton.h"
     }; 
     
-    static char input[] = "(10-3*2+1)/2*5+40/5-2";
+    static char input[] = "(2*x)";
    
     static int i = 0;
     token_t end = 
