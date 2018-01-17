@@ -7,7 +7,7 @@
 
 #define MAX_STACK_DEPTH 100
 #define ATTEMPTS_PER_TEST 5
-#define MAX_STATEMENT_SIZE 60 // < 62
+#define MAX_STATEMENT_SIZE 30 // < 62
 
 
 typedef long double (*fn_type)(long double);
