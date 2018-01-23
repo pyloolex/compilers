@@ -6,7 +6,7 @@
 #define INVALID_TOKEN -1
 #define MAX_STATES 300
 #define MAX_TOKENS 300
-#define X 123456789
+#define X -2
 
 const char NOT_CHAR = 254;
 

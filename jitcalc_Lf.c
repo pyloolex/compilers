@@ -15,7 +15,7 @@ typedef long double (*fn_type)(long double);
 
 char** statement = (char*[])
 {
-    "24.21",
+    "24",
     "50",
     "*",
     "310",
@@ -23,9 +23,9 @@ char** statement = (char*[])
     "755",
     "*",
     "x",
-    "+",
+    "*",
     "x",
-    "-",
+    "+",
     "19",
     "/",
     "69",
@@ -299,10 +299,10 @@ void measure_time()
 
 int main()
 {
-    measure_time();
+    //measure_time();
     
-    //fn_type calc = get_jit_function(19);
-    //printf("%Lf\n", calc(12));
+    fn_type calc = get_jit_function(62);
+    printf("%Lf\n", calc(12));
     
     return 0;
 }

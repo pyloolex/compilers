@@ -62,7 +62,16 @@ token_t my_yylex(bool restart)
         #include "lex_automaton.h"
     }; 
     
-    static char input[] = "(2*x)";
+    static char input[] =
+        //"((((("
+        //"((((24 * 50 - 310) * 755 * x + x) / 19"
+        //" + 69 + x) * 49 - 12 + 5) / 4 * x - 7";
+        //" + 10) * x + x - 12) / 313 + x) / 4"
+        //" * 9 - 2 + x - 5) / 16"
+        //" * 8 + x - 3) / 77";
+        "24 * 50 - 310 * 755 * x + x / 19"
+        " + 69 + x * 49 - 12 + 5 / 4 * x - 7";
+        
    
     static int i = 0;
     token_t end = 
@@ -96,7 +105,7 @@ token_t my_yylex(bool restart)
         parse_data(&token, input, i, max_match);
         i += max_match;
 
-        //printf("mm %d\n", max_match);
+        //printf("mm %d %c\n", i, input[i - 1]);
         return token;
     }
     

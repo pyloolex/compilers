@@ -9,7 +9,7 @@
 
 char** statement = (char*[])
 {
-    "24.21",
+    "24",
     "50",
     "*",
     "310",
@@ -17,9 +17,9 @@ char** statement = (char*[])
     "755",
     "*",
     "x",
-    "+",
+    "*",
     "x",
-    "-",
+    "+",
     "19",
     "/",
     "69",
@@ -98,7 +98,8 @@ long double calculate(long double x, int size)
         }
         else if (statement[i][0] == '/')
         {
-            stack[stack_size - 2] /= stack[stack_size - 1];
+            //stack[stack_size - 2] /= stack[stack_size - 1];
+            stack[stack_size - 2] = (int)(stack[stack_size - 2] / stack[stack_size - 1]);
             stack_size--;
         }
         else if (statement[i][0] == 'x')
@@ -157,9 +158,9 @@ void measure_time()
 
 int main()
 {
-    //printf("%Lf\n", calculate(12, 3));
+    printf("%Lf\n", calculate(12, 30));
     
-    measure_time();
+    //measure_time();
     
     return 0;
 }
