@@ -44,7 +44,7 @@
 2. Install libgccjit library.
 
     ```
-    sudo apt install libgccjit-7-dev
+    sudo apt install libgccjit-5-dev
     ```
 
 3. Before compilation you need to find out where libgccjit.h and libgccjit.so are.
@@ -56,9 +56,9 @@
 
     These paths should look something like this:
     
-    `/usr/lib/gcc/x86_64-linux-gnu/7/include/` - for libgccjit.h
+    `/usr/lib/gcc/x86_64-linux-gnu/5/include/` - for libgccjit.h
     
-    `/usr/lib/gcc/x86_64-linux-gnu/7/` - for libgccjit.so
+    `/usr/lib/gcc/x86_64-linux-gnu/5/` - for libgccjit.so
 
 
 4. Compilation. You can do it in two ways:
@@ -66,14 +66,14 @@
     a) Compile using -I and -L flags.
     
     ```
-    gcc hello.c -o hello -lgccjit -I/usr/lib/gcc/x86_64-linux-gnu/7/include/ -L/usr/lib/gcc/x86_64-linux-gnu/7/ (altering these paths to found paths)
+    gcc hello.c -o hello -lgccjit -I/usr/lib/gcc/x86_64-linux-gnu/5/include/ -L/usr/lib/gcc/x86_64-linux-gnu/5/ (altering these paths to found paths)
     ```
     
     b) Change global variables (you can add it to .bash-aliases).
     
     ```
-    export CPATH=$CPATH:/usr/lib/gcc/x86_64-linux-gnu/7/include/
-    export LIBRARY_PATH=$LIBRARY_PATH:/usr/lib/gcc/x86_64-linux-gnu/7/
+    export CPATH=$CPATH:/usr/lib/gcc/x86_64-linux-gnu/5/include/
+    export LIBRARY_PATH=$LIBRARY_PATH:/usr/lib/gcc/x86_64-linux-gnu/5/
     ```
 	
     And compile without paths specification.
@@ -88,12 +88,12 @@
     ```
 
     It should look something like this:
-    `/usr/lib/gcc/x86_64-linux-gnu/4.8/`
+    `/usr/lib/gcc/x86_64-linux-gnu/5/`
 
     Add it to the LIBRARY_PATH:
     
     ```
-    export LIBRARY_PATH=$LIBRARY_PATH:/usr/lib/gcc/x86_64-linux-gnu/4.8/
+    export LIBRARY_PATH=$LIBRARY_PATH:/usr/lib/gcc/x86_64-linux-gnu/5/
     ```
         
 6. Now you can run it.
