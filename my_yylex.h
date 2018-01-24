@@ -46,12 +46,13 @@ void parse_data(token_t* token, char* input, int start_pos, int len)
     int i;
     for (i = 0; i < strlen(temp); i++)
     {
-        if (!isdigit(temp[i]))
+        if (!isdigit(temp[i]) && temp[i] != '.')
         {
             return;
         }
     }
-    token->data = atoi(temp);
+    
+    token->data = (long double)atof(temp);
 }
 
 
@@ -69,7 +70,7 @@ token_t my_yylex(bool restart)
         //" + 10) * x + x - 12) / 313 + x) / 4"
         //" * 9 - 2 + x - 5) / 16"
         //" * 8 + x - 3) / 77";
-        "24 * 50 - 310 * 755 * x + x / 19"
+        "24.21 * 50 - 310 * 755 * x + x / 19"
         " + 69 + x * 49 - 12 + 5 / 4 * x - 7";
         
    

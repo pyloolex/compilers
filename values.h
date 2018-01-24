@@ -155,7 +155,7 @@ typedef struct grammar_t
 typedef struct token_t
 {
     int id;
-    int data;
+    long double data;
 } token_t;
 
 typedef struct tables_t

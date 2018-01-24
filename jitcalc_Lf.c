@@ -15,7 +15,7 @@ typedef long double (*fn_type)(long double);
 
 char** statement = (char*[])
 {
-    "24",
+    "24.21",
     "50",
     "*",
     "310",
@@ -291,7 +291,7 @@ void measure_time()
     int i;
     for (i = 1; i < MAX_STATEMENT_SIZE; i += 2)
     {
-        printf("(%d;%.3f)", i, timer[i]);
+        printf("gccjit,%d,%.3lf\n", i, timer[i]);
     }
     printf("\n");
 }
@@ -299,10 +299,10 @@ void measure_time()
 
 int main()
 {
-    //measure_time();
+    measure_time();
     
-    fn_type calc = get_jit_function(62);
-    printf("%Lf\n", calc(12));
+    //fn_type calc = get_jit_function(30);
+    //printf("%Lf\n", calc(12));
     
     return 0;
 }
