@@ -157,9 +157,9 @@ void measure_time()
 
 int main()
 {
-    //printf("%Lf\n", calculate(12, 30));
+    printf("%Lf\n", calculate(12, 30));
     
-    measure_time();
+    //measure_time();
     
     return 0;
 }

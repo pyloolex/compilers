@@ -16,7 +16,7 @@ def main():
                    truncate=True, size=8, aspect=1.2)
     pyplot.xlim(0, 30)
     pyplot.yticks(range(1, 12))
-    pyplot.yscale("log")
+    # pyplot.yscale("log")
     pyplot.grid(True)
     # pyplot.show()
     pyplot.savefig('benchmark.png')

@@ -1,7 +1,7 @@
 CFLAGS+=-I/usr/lib/gcc/x86_64-linux-gnu/5/include/ -L/usr/lib/gcc/x86_64-linux-gnu/5/
 LDLIBS+=-lgccjit
 
-all: jitcalc usualRPN recalc
+all: jitcalc usualRPN recalc ast
 
 jitcalc: jitcalc_Lf.c
 	$(CC) $< -o $@ $(LDLIBS) $(CFLAGS)
@@ -10,6 +10,8 @@ usualRPN: usualRPN.c
 	$(CC) $< -o $@
 
 
+ast: ast.c syn_tables.h my_yylex.h lex_automaton.h executions.h
+	$(CC) $< -lm -o $@
 
 recalc: recalc.c syn_tables.h my_yylex.h lex_automaton.h executions.h
 	$(CC) $< -lm -o $@
@@ -24,7 +26,7 @@ GT: gen_tables.c grammar.h
 grammar.h: PG grammar.txt
 	./$< < $(word 2, $^) > $@
 
-PG: parse_grammar.c
+PG: parse_grammar.c values.h
 	$(CC) $< -o $@
 
 
@@ -37,14 +39,14 @@ BLA: build_lex_autom.c lex_sequence.h grammar.h
 lex_sequence.h: PLR lex_rules.txt
 	./$< < $(word 2, $^) > $@
 
-PLR: parse_lex_rules.c
+PLR: parse_lex_rules.c values.h
 	$(CC) $< -o $@
 
 
 executions.h: BE grammar.txt
 	./$< < $(word 2, $^) > $@
 
-BE: build_executions.c
+BE: build_executions.c values.h
 	$(CC) $< -o $@
 
 

@@ -165,4 +165,20 @@ typedef struct tables_t
     table_cell_t** trans;
 } tables_t;
 
+
+typedef enum
+{
+    AT_X,
+    AT_LEAF,
+    AT_FUNCTION,
+} ast_node_type_t;
+
+typedef struct ast_node_t
+{
+    int fun_idx;
+    long double val;
+    ast_node_type_t type;
+    int lf, rg;
+} ast_node_t;
+
 #endif /* _VALUES_H_ */
