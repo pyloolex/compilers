@@ -9,8 +9,8 @@
 #include "executions.h"
 
 
-#define ATTEMPTS_PER_TEST 2
-#define MAX_STATEMENT_SIZE 20  // < 21
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 15  // < 21
 
 
 long double parse(tables_t* tables, int x, token_t* input)
@@ -148,9 +148,9 @@ int main()
     };
 
     token_t input[200];
-    test_for_12(input, &tables);
+    //test_for_12(input, &tables);
         
-    //measure_time(&tables, input);
+    measure_time(&tables, input);
 
     return 0;
 }

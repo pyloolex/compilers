@@ -9,7 +9,7 @@
 
 
 #define ATTEMPTS_PER_TEST 5
-#define MAX_STATEMENT_SIZE 20  // < 21
+#define MAX_STATEMENT_SIZE 15  // < 21
 
 
 long double calculate(char* statement[][MAX_STACK_DEPTH],
@@ -117,10 +117,10 @@ int main()
     fill_statement(input, statement, st_size, MAX_STATEMENT_SIZE);
 
     
-    test_for_12(statement, st_size);
+    //test_for_12(statement, st_size);
     //printf("%Lf\n", calculate(statement, st_size, 12, 19));
     
-    //measure_time(statement, st_size);
+    measure_time(statement, st_size);
     
     return 0;
 }

@@ -11,7 +11,7 @@
 
 
 #define ATTEMPTS_PER_TEST 5
-#define MAX_STATEMENT_SIZE 2 // < 21
+#define MAX_STATEMENT_SIZE 20 // < 21
 
 
 typedef long double (*fn_type)(long double);

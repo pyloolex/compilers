@@ -9,8 +9,8 @@
 #include "executions.h"
 
 
-#define ATTEMPTS_PER_TEST 2
-#define MAX_STATEMENT_SIZE 20 // < 21
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 15  // < 21
 
 
 void build_ast(tables_t* tables, token_t* input,
@@ -236,10 +236,10 @@ int main()
     int arena_top = -1;
     ast_node_t arena[BUFFER_SIZE];
 
-    test_for_12(input, &tables, arena, arena_top);
+    //test_for_12(input, &tables, arena, arena_top);
     //print_ast(arena, arena_top);
 
-    //measure_time(arena, &tables, input);
+    measure_time(arena, &tables, input);
     
     return 0;
 }
