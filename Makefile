@@ -3,17 +3,17 @@ LDLIBS+=-lgccjit
 
 all: jitcalc usualRPN recalc ast
 
-jitcalc: jitcalc_Lf.c
+jitcalc: jitcalc.c
 	$(CC) $< -o $@ $(LDLIBS) $(CFLAGS)
 
 usualRPN: usualRPN.c
 	$(CC) $< -o $@
 
 
-ast: ast.c syn_tables.h my_yylex.h lex_automaton.h executions.h
+ast: ast.c syn_tables.h my_yylex.h lex_automaton.h executions.h statements.h
 	$(CC) $< -lm -o $@
 
-recalc: recalc.c syn_tables.h my_yylex.h lex_automaton.h executions.h
+recalc: recalc.c syn_tables.h my_yylex.h lex_automaton.h executions.h statements.h
 	$(CC) $< -lm -o $@
 
 

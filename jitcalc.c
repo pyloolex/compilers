@@ -1,82 +1,20 @@
 #include <libgccjit.h>
 
+#include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
+#include "rpn.h"
 
-#define MAX_STACK_DEPTH 100
+
 #define ATTEMPTS_PER_TEST 5
-#define MAX_STATEMENT_SIZE 30 // < 62
+#define MAX_STATEMENT_SIZE 2 // < 21
 
 
 typedef long double (*fn_type)(long double);
-
-
-char** statement = (char*[])
-{
-    "24.21",
-    "50",
-    "*",
-    "310",
-    "-",
-    "755",
-    "*",
-    "x",
-    "*",
-    "x",
-    "+",
-    "19",
-    "/",
-    "69",
-    "+",
-    "x",
-    "+",
-    "49",
-    "*",
-    "12",
-    "-",
-    "5",
-    "+",
-    "4",
-    "/",
-    "x",
-    "*",
-    "7",
-    "-",
-    "10",
-    "+",
-    "x",
-    "*",
-    "x",
-    "+",
-    "12",
-    "-",
-    "313",
-    "/",
-    "x",
-    "+",
-    "4",
-    "/",
-    "9",
-    "*",
-    "2",
-    "-",
-    "x",
-    "+",
-    "5",
-    "-",
-    "16",
-    "/",
-    "8",
-    "*",
-    "x",
-    "+",
-    "3",
-    "-",
-    "77",
-    "/",
-}; 
 
 
 void push_to_stack(gcc_jit_context* ctxt, gcc_jit_block* block, 
@@ -138,7 +76,9 @@ void operation_block(gcc_jit_context* ctxt, gcc_jit_block* block,
 }
 
 
-void create_code(gcc_jit_context* ctxt, int seq_size)
+void create_code(gcc_jit_context* ctxt, int len,
+                 char* statement[][MAX_STACK_DEPTH],
+                  int* st_size)
 {   
     gcc_jit_type* int_type = 
         gcc_jit_context_get_type(ctxt, GCC_JIT_TYPE_INT);
@@ -173,33 +113,33 @@ void create_code(gcc_jit_context* ctxt, int seq_size)
     gcc_jit_lvalue* B = gcc_jit_function_new_local(func, NULL, Lf_type, "B");
         
     int i;
-    for (i = 0; i < seq_size; i++)
+    for (i = 0; i < st_size[len]; i++)
     {
-        if (statement[i][0] == '+')
+        if (statement[len][i][0] == '+')
         {
             operation_block(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                             stack, stack_size, A, B,
                             GCC_JIT_BINARY_OP_PLUS);
         }
-        else if (statement[i][0] == '-')
+        else if (statement[len][i][0] == '-')
         {
             operation_block(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                             stack, stack_size, A, B,
                             GCC_JIT_BINARY_OP_MINUS);
         }
-        else if (statement[i][0] == '*')
+        else if (statement[len][i][0] == '*')
         {
             operation_block(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                             stack, stack_size, A, B,
                             GCC_JIT_BINARY_OP_MULT);
         }
-        else if (statement[i][0] == '/')
+        else if (statement[len][i][0] == '/')
         {
             operation_block(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                             stack, stack_size, A, B,
                             GCC_JIT_BINARY_OP_DIVIDE);
         }
-        else if (statement[i][0] == 'x')
+        else if (statement[len][i][0] == 'x')
         {
             push_to_stack(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                           stack, stack_size, x);
@@ -208,7 +148,7 @@ void create_code(gcc_jit_context* ctxt, int seq_size)
         {
             gcc_jit_rvalue* number = 
                 gcc_jit_context_new_rvalue_from_double(ctxt, Lf_type, 
-                    atof(statement[i]));
+                    atof(statement[len][i]));
             push_to_stack(ctxt, block, gcc_jit_context_one(ctxt, int_type), 
                           stack, stack_size, number);
         }
@@ -224,7 +164,9 @@ void create_code(gcc_jit_context* ctxt, int seq_size)
 }
 
 
-fn_type get_jit_function(int len)
+fn_type get_jit_function(int len,
+                         char* statement[][MAX_STACK_DEPTH],
+                         int* st_size)
 {
     gcc_jit_context* ctxt = gcc_jit_context_acquire();
     if (!ctxt)
@@ -233,7 +175,7 @@ fn_type get_jit_function(int len)
         exit(0);
     }
     
-    create_code(ctxt, len);
+    create_code(ctxt, len, statement, st_size);
     
     gcc_jit_result* result = gcc_jit_context_compile(ctxt);
     if (!result)
@@ -254,15 +196,16 @@ fn_type get_jit_function(int len)
 }
 
 
-void measure_time()
+
+void measure_time(char* statement[][MAX_STACK_DEPTH], int* st_size)
 {
     double timer[MAX_STATEMENT_SIZE];
     int len;
-    for (len = 1; len < MAX_STATEMENT_SIZE; len += 2)
+    for (len = 0; len < MAX_STATEMENT_SIZE; len++)
     {
-        printf("[len = %d]\n", len);
+        printf("[len = %d]\n", len + 1);
         
-        fn_type calculate = get_jit_function(len);
+        fn_type calculate = get_jit_function(len, statement, st_size);
 
         double sum = 0;
         int attempt;
@@ -279,30 +222,54 @@ void measure_time()
             double elapsed = ((clock() - start_time) / CLOCKS_PER_SEC);
             sum += elapsed;
             
-            printf("Elapsed time: %.3f ms\n", elapsed);
+            printf("Elapsed time: %.3f sec\n", elapsed);
         }
         timer[len] = sum / attempt;
         
         printf("_________________________________\n");
-        printf("Average elapsed time: %.3f ms\n", timer[len]);
+        printf("Average elapsed time: %.3f sec\n", timer[len]);
     }
     
     printf("\n");
     int i;
-    for (i = 1; i < MAX_STATEMENT_SIZE; i += 2)
+    for (i = 0; i < MAX_STATEMENT_SIZE; i++)
     {
-        printf("gccjit,%d,%.3lf\n", i, timer[i]);
+        printf("gccjit,%d,%.3lf\n", i + 1, timer[i]);
     }
     printf("\n");
 }
 
 
+void test_for_12(char* statement[MAX_STATEMENT_SIZE][MAX_STACK_DEPTH],
+                 int* st_size)
+{
+    int i;
+    for (i = 0; i < MAX_STATEMENT_SIZE; i++)
+    {
+        fn_type calc = get_jit_function(i, statement, st_size);
+        printf("%Lf\n", calc(12));
+    }
+}
+
+
 int main()
 {
-    measure_time();
+    char* input[] =
+    {
+        #include "statements.h"
+    };
+    int st_size[MAX_STATEMENT_SIZE] = {};
+    char* statement[MAX_STATEMENT_SIZE][MAX_STACK_DEPTH];
+   
+    fill_statement(input, statement, st_size, MAX_STATEMENT_SIZE);
+
     
-    //fn_type calc = get_jit_function(30);
+    measure_time(statement, st_size);
+    
+    //fn_type calc = get_jit_function(19, statement, st_size);
     //printf("%Lf\n", calc(12));
+
+    //test_for_12(statement, st_size);
     
     return 0;
 }
