@@ -56,63 +56,71 @@ void parse_data(token_t* token, char* input, int start_pos, int len)
 }
 
 
-token_t my_yylex(bool restart)
+token_t my_yylex(int expr_idx)
 {
     lex_automaton_t automaton =
     {
         #include "lex_automaton.h"
     }; 
     
-    static char input[] =
-        //"((((("
-        //"((((24 * 50 - 310) * 755 * x + x) / 19"
-        //" + 69 + x) * 49 - 12 + 5) / 4 * x - 7";
-        //" + 10) * x + x - 12) / 313 + x) / 4"
-        //" * 9 - 2 + x - 5) / 16"
-        //" * 8 + x - 3) / 77";
-        
-        "24.21 * 50 - 310 * 755 * x + x / 19"
-        " + 69 + x * 49 - 12 + 5 / 4 * x - 7";
-        //"24.21 * x - 310 + 2";
+    static char* input[] =
+    {
+        "3.2",
+        "3.2-x",
+        "3.2-x/40",
+        "3.2-x/(40-6.17)",
+        "3.2-x/(40-6.17)+2",
+        "3.2-x/(40-6.17)+(2*x)",
+        "3.2-x/(40-6.17)+(2*x+1)",
+        "3.2-x/(40-6.17)+((2*x+1)/4)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-x",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+7",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+(7-x)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+(7-x/6.1)",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+(7-x/(6.1-x))",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+(7-x/(6.1-(x-0.2)))",
+        "3.2-x/(40-6.17)+((2*x+1)/4-7.7)*0.3-(x*4.1-7)/6+(7-x/(6.1-(x-0.2)*0.4))",
+    };
         
    
-    static int i = 0;
-    token_t end = 
+    static int ptr[100] = {};    
+    for ( ; ptr[expr_idx] < strlen(input[expr_idx]); )
     {
-        .id = 0,
-    };    
-    if (restart)
-    {
-        i = 0;
-        return end;
-    }
-    
-    for ( ; i < strlen(input); )
-    {
-        if (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
+        if (input[expr_idx][ptr[expr_idx]] == ' ' ||
+            input[expr_idx][ptr[expr_idx]] == '\t' ||
+            input[expr_idx][ptr[expr_idx]] == '\n')
         {
-            i++;
+            ptr[expr_idx]++;
             continue;
         }
         
         token_t token;
-        int max_match = calc_max_match(&automaton, input, i, &token.id);
+        int max_match = calc_max_match(&automaton, input[expr_idx],
+                                       ptr[expr_idx], &token.id);
         
         if (max_match == 0)
         {
             printf("[my_yylex.h] Error while parsing input ");
-            printf("at %d position.\n", i);
+            printf("at %d position.\n", ptr[expr_idx]);
             exit(0);
         }
         
-        parse_data(&token, input, i, max_match);
-        i += max_match;
+        parse_data(&token, input[expr_idx], ptr[expr_idx], max_match);
+        ptr[expr_idx] += max_match;
 
         //printf("mm %d %c\n", i, input[i - 1]);
         return token;
     }
     
-    
+    token_t end = 
+    {
+        .id = 0,
+    };
     return end;
 }
 

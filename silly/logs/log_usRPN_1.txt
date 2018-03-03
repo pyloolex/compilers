@@ -1,0 +1,61 @@
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 15
+
+[len = 1]
+Elapsed time: 1.252 ms
+Elapsed time: 1.214 ms
+Elapsed time: 1.198 ms
+Elapsed time: 1.186 ms
+Elapsed time: 1.215 ms
+_________________________________
+Average elapsed time: 1.213 ms
+[len = 3]
+Elapsed time: 1.850 ms
+Elapsed time: 1.862 ms
+Elapsed time: 1.873 ms
+Elapsed time: 1.829 ms
+Elapsed time: 1.811 ms
+_________________________________
+Average elapsed time: 1.845 ms
+[len = 5]
+Elapsed time: 2.402 ms
+Elapsed time: 2.400 ms
+Elapsed time: 2.408 ms
+Elapsed time: 2.414 ms
+Elapsed time: 2.412 ms
+_________________________________
+Average elapsed time: 2.407 ms
+[len = 7]
+Elapsed time: 2.957 ms
+Elapsed time: 3.025 ms
+Elapsed time: 3.056 ms
+Elapsed time: 3.026 ms
+Elapsed time: 2.980 ms
+_________________________________
+Average elapsed time: 3.009 ms
+[len = 9]
+Elapsed time: 3.138 ms
+Elapsed time: 3.276 ms
+Elapsed time: 3.068 ms
+Elapsed time: 3.126 ms
+Elapsed time: 3.140 ms
+_________________________________
+Average elapsed time: 3.149 ms
+[len = 11]
+Elapsed time: 3.256 ms
+Elapsed time: 3.209 ms
+Elapsed time: 3.238 ms
+Elapsed time: 3.252 ms
+Elapsed time: 3.278 ms
+_________________________________
+Average elapsed time: 3.247 ms
+[len = 13]
+Elapsed time: 3.798 ms
+Elapsed time: 3.772 ms
+Elapsed time: 3.815 ms
+Elapsed time: 3.794 ms
+Elapsed time: 3.799 ms
+_________________________________
+Average elapsed time: 3.796 ms
+
+(1;1.213)(3;1.845)(5;2.407)(7;3.009)(9;3.149)(11;3.247)(13;3.796)

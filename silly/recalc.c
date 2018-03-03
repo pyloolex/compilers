@@ -9,21 +9,27 @@
 #include "executions.h"
 
 
-#define ATTEMPTS_PER_TEST 2
-#define MAX_STATEMENT_SIZE 20  // < 21
+#define ATTEMPTS_PER_TEST 5
+#define MAX_STATEMENT_SIZE 30 // < 31
 
 
-long double parse(tables_t* tables, int x, token_t* input)
+long double parse(tables_t* tables, int x, token_t* input, int len)
 {
     int state[MAX_STATES] = {0};
     long double result[MAX_STATES] = {0};
-    int stack_top = -1;
+    int stack_top = 0;
 
     int input_ptr = 0;
     token_t token = input[input_ptr++];
 
-    while (true)
+    len++;
+    while (input_ptr <= len)
     {
+        if (input_ptr == len)
+        {
+            token.id = 0;
+        }
+        
         if (token.id == INVALID_TOKEN)
         {
             printf("Invalid token has been found at %d-th position of input.",
@@ -59,7 +65,7 @@ long double parse(tables_t* tables, int x, token_t* input)
                 break;
                 
             case AC_ACCEPT:
-                return result[0];
+                return result[1];
                 
             case AC_ERROR:
                 printf("Invalid token [id=%d] for the %d-th state.\n",
@@ -70,22 +76,13 @@ long double parse(tables_t* tables, int x, token_t* input)
 }
 
 
-void prepare_input(token_t* input, int expr_idx)
-{
-    int i;
-    for (i = 0, input[i] = my_yylex(expr_idx); input[i].id;
-         input[++i] = my_yylex(expr_idx));
-}
-
-
 void measure_time(tables_t* tables, token_t* input)
 {
     double timer[MAX_STATEMENT_SIZE];
     int len;
-    for (len = 0; len < MAX_STATEMENT_SIZE; len++)
+    for (len = 1; len < MAX_STATEMENT_SIZE; len += 2)
     {
-        prepare_input(input, len);       
-        printf("[len = %d]\n", len + 1);
+        printf("[len = %d]\n", len);
         double sum = 0;
         int attempt;
         for (attempt = 0; attempt < ATTEMPTS_PER_TEST; attempt++)
@@ -95,48 +92,37 @@ void measure_time(tables_t* tables, token_t* input)
             int x;
             for (x = 0; x < 1e7; x++)
             {
-                parse(tables, x, input);
+                parse(tables, x, input, len);
             }
             
             double elapsed = ((clock() - start_time) / CLOCKS_PER_SEC);
             sum += elapsed;
             
-            printf("Elapsed time: %.3f sec\n", elapsed);
+            printf("Elapsed time: %.3f ms\n", elapsed);
         }
         timer[len] = sum / attempt;
         
         printf("_________________________________\n");
-        printf("Average elapsed time: %.3f sec\n", sum / attempt);
+        printf("Average elapsed time: %.3f ms\n", sum / attempt);
     }
     
     printf("\n");
     int i;
-    for (i = 0; i < MAX_STATEMENT_SIZE; i++)
+    for (i = 1; i < MAX_STATEMENT_SIZE; i += 2)
     {
-        printf("recalc,%d,%.3lf\n", i + 1, timer[i]);
+        printf("recalc,%d,%.3lf\n", i, timer[i]);
     }
     printf("\n");
+
+    
 }
 
 
-void print_input(token_t* input)
-{    
-    int i;
-    for (i = 0; i < 70; i++)
-    {
-        printf("[%d] %d %Lf\n", i, input[i].id, input[i].data);
-    }
-}
-
-
-void test_for_12(token_t* input, tables_t* tables)
+void prepare_input(token_t* input)
 {
     int i;
-    for (i = 0; i < MAX_STATEMENT_SIZE; i++)
-    {
-        prepare_input(input, i);
-        printf("%Lf\n", parse(tables, 12, input));
-    }
+    for (i = 0, input[i] = my_yylex(0); input[i].id;
+         input[++i] = my_yylex(0)); 
 }
 
 
@@ -148,9 +134,17 @@ int main()
     };
 
     token_t input[200];
-    test_for_12(input, &tables);
-        
-    //measure_time(&tables, input);
+    prepare_input(input);
 
+    int i;
+    for (i = 0; i < 70; i++)
+    {
+        //printf("[%d] %d %Lf\n", i, input[i].id, input[i].data);
+    }
+    
+    measure_time(&tables, input);
+
+    //printf("%Lf\n", parse(&tables, 12, input, 29));
+    
     return 0;
 }
